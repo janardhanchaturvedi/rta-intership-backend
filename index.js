@@ -1,9 +1,19 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cors = require("cors");
 const PORT = 3001;
 
 app.use(express.json());
+app.use(cors());
+const { Schema } = mongoose;
+const userSchema = new Schema({
+  fullName: String,
+  email: String,
+  password: String,
+});
+
+const user = mongoose.model("User", userSchema);
 
 app.get("/products", (req, res) => {
   console.log("producst waala end point trigger hua");
@@ -64,6 +74,23 @@ app.get("/products", (req, res) => {
   ]);
 });
 
+app.post("/register", async (req, res) => {
+  const { fullName, email, password } = req?.body;
+  const response = await user.create({
+    fullName,
+    email,
+    password,
+  });
+  return res.json({
+    message: "User Created succefully",
+  });
+});
+app.get("/user", (req, res) => {
+  const user = user.find();
+  return res.json({
+    data: user,
+  });
+});
 app.listen(PORT, () => {
   console.log(`Server Shuru ho gya listen karna ${PORT}`);
 });
