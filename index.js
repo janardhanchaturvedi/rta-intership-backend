@@ -13,7 +13,20 @@ const userSchema = new Schema({
   password: String,
 });
 
+const productSchema = new Schema({
+  name: String,
+  category: String,
+  description: String,
+  price: Number,
+  image: String,
+  rating: {
+    rate: String,
+    count: Number,
+  },
+});
+
 const user = mongoose.model("User", userSchema);
+const Product = mongoose.model("Product", productSchema);
 
 app.get("/products", (req, res) => {
   console.log("producst waala end point trigger hua");
@@ -91,11 +104,96 @@ app.get("/user", (req, res) => {
     data: user,
   });
 });
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const users = await user.findOne({
+      email: email,
+    });
+
+    if (!users) {
+      return res.json({
+        message: "User not registered Please SignUp",
+      });
+    }
+
+    if (users.password === password) {
+      return res.json({
+        message: "User Logged In Successfully",
+      });
+    }
+    console.log("users", users);
+  } catch (error) {
+    console.log("error", error);
+    return res.json({
+      message: "Something went wrong",
+    });
+  }
+  return res.json({
+    message: "ok",
+  });
+});
+
+/**
+ * ADD PRODUCT API
+ */
+
+app.post("/products", async (req, res) => {
+  const { name, price, category, description } = req.body;
+  if (!name || !price || !category || !description) {
+    return res.json({
+      message: "Please provide all required fields",
+    });
+  }
+
+  try {
+    const productResponse = await Product.create({
+      name,
+      price,
+      category,
+      description,
+    });
+
+    if (productResponse) {
+      return res.json({
+        data: productResponse,
+        message: "Product Added Succesfully",
+      });
+    }
+  } catch (error) {
+    return res.json({
+      message: "Internal Server Error",
+    });
+  }
+});
+/**
+ * CRUD
+ * C : Create
+ * R : Read
+ * U : Update
+ * D : Delete
+ * GET ALL PRODUCTS
+ */
+
+app.get("/products", async (req, res) => {
+  const productsData = await Product.find();
+  if (productsData) {
+    return res.json({
+      message: "Data fetched Successfully",
+      data: productsData,
+    });
+  }
+});
 app.listen(PORT, () => {
   console.log(`Server Shuru ho gya listen karna ${PORT}`);
 });
 mongoose
-  .connect("mongodb://localhost:27017/janardhan12")
+  .connect(
+    "mongodb+srv://jana11111_db_user:cgizEnhhw72bfoyK@cluster0.sxofbex.mongodb.net/janardhan12",
+  )
+  // jana11111_db_user
+  //cgizEnhhw72bfoyK
   .then(() => {
     console.log("Database Connexted Suscessfully");
   })
