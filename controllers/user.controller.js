@@ -36,6 +36,8 @@ const loginUser = async (req, res) => {
     if (users.password === password) {
       return res.json({
         message: "User Logged In Successfully",
+        data : users,
+        success : true
       });
     }
     console.log("users", users);
