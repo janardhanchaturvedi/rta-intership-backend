@@ -11,6 +11,11 @@ const productSchema = new Schema({
     rate: String,
     count: Number,
   },
+  inStock: Boolean,
+  sellerId: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 const Product = mongoose.model("Product", productSchema);

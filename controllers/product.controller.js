@@ -11,8 +11,8 @@ const getProducts = async (req, res) => {
 };
 
 const addProducts = async (req, res) => {
-  const { name, price, category, description } = req.body;
-  if (!name || !price || !category || !description) {
+  const { name, price, category, description, inStock, sellerId } = req.body;
+  if (!name || !price || !category || !description || !sellerId) {
     return res.json({
       message: "Please provide all required fields",
     });
@@ -24,6 +24,8 @@ const addProducts = async (req, res) => {
       price,
       category,
       description,
+      inStock,
+      sellerId
     });
 
     if (productResponse) {
@@ -40,9 +42,9 @@ const addProducts = async (req, res) => {
   }
 };
 
-const deleteProduct = (req, res) => {};
+const deleteProduct = (req, res) => { };
 
-const updateProduct = (req, res) => {};
+const updateProduct = (req, res) => { };
 
 module.exports = {
   getProducts,
