@@ -15,10 +15,13 @@ const productSchema = new Schema({
   sellerId: {
     type: Schema.Types.ObjectId,
     ref: "User"
+  },
+  image: {
+    type: String
   }
 });
 
 const Product = mongoose.model("Product", productSchema);
-module.export = {
+module.exports = {
   Product,
 };

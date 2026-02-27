@@ -11,10 +11,11 @@ const getProducts = async (req, res) => {
 };
 
 const addProducts = async (req, res) => {
-  const { name, price, category, description, inStock, sellerId } = req.body;
-  if (!name || !price || !category || !description || !sellerId) {
+  const { name, price, category, description, inStock, sellerId, image } = req.body;
+  if (!name || !price || !category || !description) {
     return res.json({
       message: "Please provide all required fields",
+      sucess: false
     });
   }
 
@@ -25,13 +26,15 @@ const addProducts = async (req, res) => {
       category,
       description,
       inStock,
-      sellerId
+      sellerId,
+      image
     });
 
     if (productResponse) {
       return res.json({
         data: productResponse,
         message: "Product Added Succesfully",
+        sucess: true
       });
     }
   } catch (error) {
