@@ -8,6 +8,7 @@ const {
   registerUser,
   getUser,
   loginUser,
+  getSellerStats,
 } = require("./controllers/user.controller");
 const {
   getProducts,
@@ -43,6 +44,13 @@ app.post("/products", addProducts);
  */
 
 app.get("/products", getProducts);
+
+
+/**
+ * GET SELLER STATS
+ */
+
+app.get("/seller-stats", getSellerStats);
 app.listen(PORT, () => {
   console.log(`Server Shuru ho gya listen karna ${PORT}`);
 });
