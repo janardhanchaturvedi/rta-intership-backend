@@ -9,10 +9,12 @@ const {
   getUser,
   loginUser,
   getSellerStats,
+  getSellerProducts
 } = require("./controllers/user.controller");
 const {
   getProducts,
   addProducts,
+  deleteProduct,
 } = require("./controllers/product.controller");
 const PORT = 3001;
 
@@ -51,6 +53,17 @@ app.get("/products", getProducts);
  */
 
 app.get("/seller-stats", getSellerStats);
+
+/**
+ * GET SELLER'S PRODUCTS
+ */
+app.get("/seller-products", getSellerProducts);
+
+/**
+ * DELETE PRODUCT
+ */
+
+app.delete("/products/:id", deleteProduct);
 app.listen(PORT, () => {
   console.log(`Server Shuru ho gya listen karna ${PORT}`);
 });

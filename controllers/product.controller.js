@@ -45,7 +45,21 @@ const addProducts = async (req, res) => {
   }
 };
 
-const deleteProduct = (req, res) => { };
+const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteResponse = await Product.findByIdAndDelete(id);
+    return res.json({
+      message: "Product deleted successfully",
+      data: deleteResponse
+    });
+  } catch (error) {
+    console.log("error", error);
+    return res.json({
+      message: "Internal Server Error",
+    });
+  }
+};
 
 const updateProduct = (req, res) => { };
 
