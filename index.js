@@ -15,6 +15,7 @@ const {
   getProducts,
   addProducts,
   deleteProduct,
+  getProductById,
 } = require("./controllers/product.controller");
 const { bookOrder } = require("./controllers/order.controller");
 const PORT = 3001;
@@ -66,14 +67,14 @@ app.get("/seller-products", getSellerProducts);
 
 app.delete("/products/:id", deleteProduct);
 
+/*GET PRODUCT BY ID */
+app.get("/products/:id", getProductById);
 
 /**
  * Order k endpoints bhi yaha add kar dena
  */
 
-app.post("/order", bookOrder
-
-);
+app.post("/order", bookOrder);
 app.listen(PORT, () => {
   console.log(`Server Shuru ho gya listen karna ${PORT}`);
 });

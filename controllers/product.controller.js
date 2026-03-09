@@ -62,10 +62,34 @@ const deleteProduct = async (req, res) => {
 };
 
 const updateProduct = (req, res) => { };
+      
+const getProductById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const productData = await Product.findOne({ _id: id });
+    if (productData) {
+      return res.json({
+        message: "Product fetched successfully",
+        data: productData
+      });
+    } else {
+      return res.json({
+        message: "Product not found",
+      });
+    }
+  } catch (error) {
+    console.log("error", error);
+    return res.json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
 
 module.exports = {
   getProducts,
   addProducts,
   deleteProduct,
   updateProduct,
+  getProductById
 };
