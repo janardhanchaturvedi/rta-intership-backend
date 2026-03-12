@@ -49,6 +49,10 @@ app.post("/products", addProducts);
 
 app.get("/products", getProducts);
 
+/**
+ * APPROVE PRODUCT (PENDING)
+ */
+
 
 /**
  * GET SELLER STATS
@@ -75,6 +79,20 @@ app.get("/products/:id", getProductById);
  */
 
 app.post("/order", bookOrder);
+/**
+ * GET ALL ORDERS (PENDING)
+ */
+app.get("/orders",)
+
+/**
+ * GET ALL USERS (PENDING)
+ */
+
+/**
+ * GET ALL SELLERS (PENDING)
+ */
+
+
 app.listen(PORT, () => {
   console.log(`Server Shuru ho gya listen karna ${PORT}`);
 });

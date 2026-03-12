@@ -18,6 +18,10 @@ const productSchema = new Schema({
   },
   image: {
     type: String
+  },
+  isApproved: {
+    type: Boolean,
+    default: false
   }
 });
 
