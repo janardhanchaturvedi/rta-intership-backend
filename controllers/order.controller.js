@@ -28,6 +28,28 @@ const bookOrder = (req, res) => {
     }
 
 }
+const getBuyerOrders = async (req, res) => {
+    const { buyerId } = req.params;
+    try {
+        const orders = await Order.find({ buyerId }).populate('products');
+
+        console.log("Orders for buyer:", orders);
+        return res.json({
+            message: "Orders fetched successfully",
+            data: orders,
+            count: orders ? orders.length : 0,
+            success: true
+        });
+    }
+    catch (error) {
+        return res.status(500).json({
+            message: "Error fetching orders",
+            error: error.message
+        });
+    }
+}
+
 module.exports = {
-    bookOrder
+    bookOrder,
+    getBuyerOrders
 }

@@ -17,7 +17,7 @@ const {
   deleteProduct,
   getProductById,
 } = require("./controllers/product.controller");
-const { bookOrder } = require("./controllers/order.controller");
+const { bookOrder, getBuyerOrders } = require("./controllers/order.controller");
 const PORT = 3001;
 
 app.use(express.json());
@@ -92,6 +92,12 @@ app.get("/orders",)
  * GET ALL SELLERS (PENDING)
  */
 
+
+/**
+ * GET BUYER STATS 
+ */
+
+app.get("/buyer-stats/:buyerId", getBuyerOrders)
 
 app.listen(PORT, () => {
   console.log(`Server Shuru ho gya listen karna ${PORT}`);
