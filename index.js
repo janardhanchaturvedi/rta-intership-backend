@@ -9,7 +9,8 @@ const {
   getUser,
   loginUser,
   getSellerStats,
-  getSellerProducts
+  getSellerProducts,
+  getBuyersSellers
 } = require("./controllers/user.controller");
 const {
   getProducts,
@@ -98,6 +99,13 @@ app.get("/orders",)
  */
 
 app.get("/buyer-stats/:buyerId", getBuyerOrders)
+
+
+/**
+ * Get all buyyer and sellers
+ */
+
+app.get("/users", getBuyersSellers)
 
 app.listen(PORT, () => {
   console.log(`Server Shuru ho gya listen karna ${PORT}`);

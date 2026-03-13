@@ -96,10 +96,27 @@ const getSellerProducts = async (req, res) => {
   }
 }
 
+const getBuyersSellers = async (req, res) => {
+  try {
+    const users = await User.find();
+    return res.json({
+      data: users,
+      message: "Buyers and Sellers fetched successfully",
+
+    });
+  }
+  catch (error) {
+    return res.json({
+      message: "Something went wrong",
+    });
+  }
+}
+
 module.exports = {
   registerUser,
   loginUser,
   getUser,
   getSellerStats,
-  getSellerProducts
+  getSellerProducts,
+  getBuyersSellers
 };
